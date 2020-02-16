@@ -38,6 +38,7 @@ const loginInterceptor = req => {
 };
 
 module.exports = async function handleHttp(req, res) {
+  global.access(`${new Date().toLocaleString()}--${req.method}--${req.url}--${req.headers['user-agent']}`);
   // 设置返回格式
   res.setHeader('Content-Type', 'application/json');
   // 设置允许跨域

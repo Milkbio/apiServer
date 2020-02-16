@@ -4,7 +4,9 @@ const fs = require('fs');
 // 生成write steam
 const createWriteStram = (filename) => {
   const fullFileName = path.join(__dirname, '../../logs', filename);
-  const ws = fs.createWriteStream(fullFileName, {flag: 'a'});
+  const ws = fs.createWriteStream(fullFileName, {
+    flag: 'a'
+  });
   return ws;
 };
 
