@@ -1,5 +1,6 @@
 const qs = require('querystring');
 const handleUserRoutes = require('./user');
+const {SuccessModel, ErrorModel} = require('../model/res');
 
 // 处理POST请求的参数
 const getPostData = function (req) {
@@ -26,6 +27,14 @@ const getPostData = function (req) {
       })
     }
   })
+};
+
+// 登录验证拦截器
+const loginInterceptor = req => {
+  if (!req.session.username) {
+    return Promise.resolve(new ErrorModel('用户未登录'));
+  }
+  // return Promise.resolve(new SuccessModel(req.session, '用户已登录'));
 };
 
 module.exports = async function handleHttp(req, res) {
@@ -66,4 +75,4 @@ module.exports = async function handleHttp(req, res) {
   res.writeHead(404, {'Content-Type': 'text/plain'});
   res.write('404 Not Found');
   res.end();
-}
+};
