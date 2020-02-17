@@ -7,14 +7,6 @@ redisClient.on('error', err => {
   console.error(err);
 });
 
-redisClient.set('myName', 'zhangsan', redis.print);
-
-redisClient.get('myName', (err, val) => {
-  if (err) return console.error(err);
-  console.log(val);
-  redisClient.quit();
-});
-
 exports.setRedis = (key, value) => {
   const val = typeof value === 'object' ? JSON.stringify(value) : value;
   redisClient.set(key, val, redis.print)

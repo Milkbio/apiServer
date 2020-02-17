@@ -33,5 +33,6 @@ switch (env) {
 }
 
 module.exports = {
-  MYSQL_CONFIG
-}
+  MYSQL_CONFIG,
+  REDIS_CONFIG
+};
