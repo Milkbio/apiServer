@@ -6,8 +6,18 @@ const login = async (req) => {
 
   return execSQL(sql).then(res => res);
 };
+const getUserInfo = async (context) => {
+  const {session} = context;
+  if (session.userid) {
+    const sql = `select * from users where id='${session.userid}'`;
+    return execSQL(sql).then(res => res);
+  } else {
+    return [];
+  }
+};
 
 
 module.exports = {
-  loginController: login
+  login,
+  getUserInfo
 };

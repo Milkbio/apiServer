@@ -1,11 +1,12 @@
 const router = require('koa-router')();
-const {loginController} = require('../controller/user');
+const userController = require('../controller/user');
 const {SuccessModel, ErrorModel} = require('../model/res');
 
 router.prefix('/api/user');
 
+// 登录
 router.post('/login', async (context) => {
-  const result = await loginController(context.request);
+  const result = await userController.login(context.request);
   if (result.length) {
     result[0].password = '';
 
@@ -15,9 +16,23 @@ router.post('/login', async (context) => {
     context.body = new SuccessModel(result[0], '登录成功');
 
   } else {
-    context.body = ErrorModel(null, '用户名或密码不正确');
+    context.body = new ErrorModel(null, '用户名或密码不正确');
   }
 });
+
+// 获取用户信息
+router.post('/get_information', async (context) => {
+  const result = await userController.getUserInfo(context);
+
+  if (result.length) {
+    context.body = new SuccessModel(result[0], '操作成功');
+  } else {
+    context.body = ErrorModel('用户未登录');
+  }
+});
+
+
+
 
 /*router.get('/login-test', async (context, next) => {
   const {session} = context;
