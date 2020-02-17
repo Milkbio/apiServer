@@ -27,7 +27,7 @@ router.post('/get_information', async (context) => {
   if (result.length) {
     context.body = new SuccessModel(result[0], '操作成功');
   } else {
-    context.body = ErrorModel('用户未登录');
+    context.body = new ErrorModel('用户未登录');
   }
 });
 

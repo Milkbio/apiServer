@@ -32,12 +32,14 @@ app.use(async (ctx, next) => {
 });
 
 // session
-app.keys = ['Wjo332ll@0bz'];
+app.keys = ['fg@NNwrDw54e6co@'];
 app.use(koaSession({
+  key: 'uni_id',
+  prefix: 'JSSESSIONID::',
   cookie: {
     path: '/',
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000
+    maxAge: 10 * 60 * 1000
   },
   store: koaRedis({
     all: `${REDIS_CONFIG.host}:${REDIS_CONFIG.port}`
