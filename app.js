@@ -39,7 +39,7 @@ app.use(koaSession({
   cookie: {
     path: '/',
     httpOnly: true,
-    maxAge: 10 * 60 * 1000
+    maxAge: 30 * 60 * 1000
   },
   store: koaRedis({
     all: `${REDIS_CONFIG.host}:${REDIS_CONFIG.port}`
