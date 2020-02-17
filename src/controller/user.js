@@ -9,5 +9,5 @@ const login = async (req) => {
 
 
 module.exports = {
-  login
+  loginController: login
 };

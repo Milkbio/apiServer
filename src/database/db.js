@@ -18,7 +18,7 @@ const execSQL = function (sql) {
         return;
       }
       resolve(result);
-      global.logger.info('查询结果', result);
+      console.info('查询结果', result);
     })
   })
 };

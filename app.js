@@ -43,6 +43,7 @@ app.use(koaSession({
     all: `${REDIS_CONFIG.host}:${REDIS_CONFIG.port}`
   })
 }));
+
 // routes
 // app.use(index.routes(), index.allowedMethods())
 app.use(userRoute.routes(), userRoute.allowedMethods());
