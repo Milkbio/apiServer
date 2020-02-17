@@ -12,6 +12,8 @@ const {REDIS_CONFIG} = require('./config/db');
 // const index = require('./routes/index');
 const userRoute = require('./src/routes/user');
 
+const {ErrorModel} = require('./src/model/res');
+
 // error handler
 onerror(app);
 
@@ -45,6 +47,18 @@ app.use(koaSession({
     all: `${REDIS_CONFIG.host}:${REDIS_CONFIG.port}`
   })
 }));
+
+// 添加拦截器
+/*app.use(async (context, next) => {
+  const {url} = context.request;
+  const unauthUrls = ['/api/user/login'];
+  if (!unauthUrls.includes(url) && !context.session.userid) {
+    context.status = 401;
+    context.body = new ErrorModel('用户未登录');
+    return;
+  }
+  await next();
+});*/
 
 // routes
 // app.use(index.routes(), index.allowedMethods())

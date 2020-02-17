@@ -1,6 +1,7 @@
 const router = require('koa-router')();
 const userController = require('../controller/user');
 const {SuccessModel, ErrorModel} = require('../model/res');
+const loginCheck = require('../middleware/loginCheck');
 
 router.prefix('/api/user');
 
@@ -21,7 +22,7 @@ router.post('/login', async (context) => {
 });
 
 // 获取用户信息
-router.post('/get_information', async (context) => {
+router.post('/get_information', loginCheck, async (context) => {
   const result = await userController.getUserInfo(context);
 
   if (result.length) {
